@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ワンクリック詐欺</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    
+    <div id="topBlock"><!--背景色範囲選択用-->
+        <section class="left-text-set"><!--文字の位置調節用-->
+            <div class="photo_tips">
+                <p>写真を撮影しました</p>
+            </div>
+
+            <h1 class="title">登録完了</h1>
+    
+            <p class="okyakusama">お客様の会員登録が正常に完了しました。</p>
+            <p class="kigennai">期限内に<span class="yen">98,000円</span>お支払いください。</p>
+            <div class="countDownBox">
+                <p>残り
+                    <span id="hour">6</span>時間
+                    <span id="min">0</span>分
+                    <span id="sec">0</span>秒
+                </p>
+                <div class="type-stripe"></div>
+            </div>
+            <p class="gotyuui">お支払いの確認ができない場合は<span class="hou">法的措置</span>に則り身元特定後、<span class="souou">相応の対処</span>を取らせていただきますのでご注意ください。</p>
+            <p class="nao">なお、誤操作による登録の場合は以下にお問い合わせください。</p>
+        </section>
+    </div>
+
+    <div id="form"><!--フォーム選択用-->
+        <h2>お客様情報</h2>
+        <table class="table1">
+            <tr>
+                <td>登録日時</td>
+                <td id="date"></td>
+            </tr>
+            <tr class="light_gray">
+                <td class="line_none">端末情報</td>
+                <td class="line_none" id="device"></td>
+            </tr>
+        </table>
+
+        <h2>お問い合わせ</h2>
+        <table class="table2">
+            <tr>
+                <td>電話番号</td>
+                <td>0123-456-789</td>
+            </tr>
+            <tr class="light_gray">
+                <td class="line_none">メールアドレス</td>
+                <td class="line_none">gimukyoikulose@gmail.com</td>
+            </tr>
+        </table>
+    
+        <h2>お振込先</h2>
+        <table class="table3">
+            <tr>
+                <td>銀行名（銀行コード）</td>
+                <td>極道銀行（4649）</td>
+            </tr>
+            <tr class="light_gray">
+                <td>支店名（支店コード）</td>
+                <td>近江支店（013）</td>
+            </tr>
+            <tr>
+                <td>種別</td>
+                <td>普通預金</td>
+            </tr>
+            <tr class="light_gray">
+                <td class="line_none">口座番号</td>
+                <td class="line_none">5910777</td>
+            </tr>
+        </table>
+    
+    </div>
+
+    <!--JavaScript jQuery-->
+    <script>
+        const se = new Audio("Camera-Film03-1.mp3");
+        se.play();//再生
+
+        let c = 21600;
+
+        setInterval(() => {
+        $("#hour").text(Math.floor(c / 3600));
+        $("#min").text(Math.floor(c / 60) % 60);
+        $("#sec").text(Math.floor(c % 60));
+        c = c - 1;
+        }, 1000)
+
+        $("#date").text(new Date().toLocaleString());
+        $(function () {
+            const ua = navigator.userAgent;
+            if (ua.indexOf('iPhone') > -1 || (ua.indexOf('Android') > -1 && ua.indexOf('Mobile') > -1)) {
+            // スマートフォン
+            $("#device").text("スマートフォン端末");
+            } else if (ua.indexOf('iPad') > -1 || ua.indexOf('Android') > -1) {
+            // タブレット
+            $("#device").text("タブレット端末");
+            } else {
+            // PC
+            $("#device").text("PC端末");
+        }
+        })
+    </script>
+</body>
+</html>
